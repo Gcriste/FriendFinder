@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Survey</title>
@@ -164,30 +169,114 @@
         <div class="row">
             <div class="col-4"></div>
             <div class="col-3">
-                <a href="/app/data/friends.js"> API Friends List</a>
+                <a href="/api/friends" alt="api friends list" target="_blank"> API Friends List</a>
                 <a href="github.com"> GitHub Repo</a>
             </div>
         </div>
 
 
     </div>
+    <div id="results-modal" class="modal">
+        <div class="modal-content">
+            <h4>Closest Friend Match</h4>
+            <div class="divider"></div>
+            <h5 id="match-name"></h5>
+            <img id="match-image" class="materialboxed" width="650" src="">
+        </div>
+        <div class="modal-footer">
+            <a href="/survey" class="modal-action modal-close waves-effect waves-green btn-flat">Fill Again!</a>
+        </div>
+    </div>
 
 
 
 
 
-    <script src="/app/assets/submitFriend.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    
+ 
+    <!--userinput javascript-->
+    <script>
+        $(document).ready(function () {
+          
+            $('.modal').modal({
+                dismissible: false,
+                opacity: .5,
+                inDuration: 300,
+                outDuration: 200,
+                startingTop: '4%',
+                endingTop: '10%'
+            });
+        });
+
+            $("#submit").on("click", function (event) {
+                event.preventDefault();
+
+                // Form validation
+                function validateForm() {
+                    var isValid = true;
+                    $(".form-control").each(function () {
+                        if ($(this).val() === "") {
+                            isValid = false;
+                        }
+                    });
+
+                    $(".chosen-select").each(function () {
+
+                        if ($(this).val() === "") {
+                            isValid = false;
+                        }
+                    });
+                    return isValid;
+                }
+
+                // If all input forms are complete
+                if (validateForm()) {
+                    var newUser = {
+                        name: $("#inputname").val(),
+                        photo: $("#inputphoto").val(),
+                        scores: [
+                            $("#question1").val(),
+                            $("#question2").val(),
+                            $("#question3").val(),
+                            $("#question4").val(),
+                            $("#question5").val(),
+                            $("#question6").val(),
+                            $("#question7").val(),
+                            $("#question8").val(),
+                            $("#question9").val(),
+                            $("#question10").val()
+                        ]
+                    };
+
+
+                    $.post("/api/friends", newUser, function (data) {
+
+
+                        $("#match-name").text(data.name);
+                        $("#match-image").attr("src", data.photo);
+
+                        $("inputname").val("");
+                        $("inputphoto").val("")
+
+                        $("#results-modal").modal('open');
+
+                    });
+                } else {
+                    alert("Please answer every question before you submit!");
+                }
+            });
+       
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+   </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+   </script>
+
 
 </body>
 
