@@ -41,6 +41,7 @@ module.exports = function(app) {
 
     // send back to browser the best friend match
     res.send(friends[bestFriendIndex]);
+    console.log(totalDifference)
     console.log(friends[bestFriendIndex])
   });
 };
