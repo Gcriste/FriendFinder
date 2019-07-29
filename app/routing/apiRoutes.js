@@ -29,7 +29,7 @@ module.exports = function(app) {
         totalDifference += difference;
       }
 
-      // if there is a new minimum, change the best friend index and set the new minimum 
+      // change the best friend index and set the new minimum if needed
       if(totalDifference < minDifference) {
         bestFriendIndex = i;
         minDifference = totalDifference;
