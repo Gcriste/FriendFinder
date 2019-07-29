@@ -1,20 +1,9 @@
 body {
-	font-family: 'Roboto', sans-serif;
 	background: #D7FFCF;
 }
 
-.site {
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-}
-
-.content {
-	flex: 1;
-}
-
 h1 {
-	font-family: 'Baloo', cursive;
+
 	font-size: 4em;
 	text-align: center;
 	margin-top: 75px;
@@ -40,10 +29,6 @@ footer {
 
 .btn {
 	margin: 30px;
-}
-
-form {
-	margin-top: 40px;
 }
 
 a {

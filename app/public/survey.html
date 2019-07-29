@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="/app/css/style.css">
-
+        <link rel= "stylesheet"  type = "text/css" href= "css/reset.css">
+        <link rel= "stylesheet" type = "text/css" href= "css/style.css">
     <title>Survey</title>
 
 </head>
@@ -235,12 +235,11 @@
                     ]
                 };
                 var currentURL = window.location.origin;
-                // Ajax call for receiving response after POST req
+                // Ajax call for response after POST req
                 $.post(currentURL + "/api/friends", newUser, function (data) {
                     $("#bestFriend").text(data.name);
                     $("#bestFriendPhoto").attr("src", data.photo);
                     $("#bestFriendModal").modal("toggle");
-
 
                 });
             } else {
