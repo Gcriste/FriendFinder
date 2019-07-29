@@ -11,6 +11,7 @@ module.exports = function(app) {
 
     // get user information
     var user = req.body;
+    var newFriend;
 
     // parseInt for scores
     for(var i = 0; i < user.scores.length; i++) {
@@ -18,20 +19,19 @@ module.exports = function(app) {
     }
 
     //result will be whoever has the minimum difference in scores
-    var bestFriendIndex = 0;
+    var bestFriendNumber = 0;
     var minDifference = 100;
 
     // finds the friend closest to your scores
     for(var i = 0; i < friends.length; i++) {
       var totalDifference = 0;
       for(var j = 0; j < friends[i].scores.length; j++) {
-        var difference = Math.abs(user.scores[j] - friends[i].scores[j]);
-        totalDifference += difference;
+        totalDifference += Math.abs(user.scores[j] - friends[i].scores[j]);
       }
 
       // change the best friend index and set the new minimum if needed
       if(totalDifference < minDifference) {
-        bestFriendIndex = i;
+       newFriend = friends[i];
         minDifference = totalDifference;
       }
     }
@@ -40,8 +40,8 @@ module.exports = function(app) {
     friends.push(user);
 
     // send back to browser the best friend match
-    res.send(friends[bestFriendIndex]);
+    res.send(newFriend);
     console.log(totalDifference)
-    console.log(friends[bestFriendIndex])
+    console.log(newFriend)
   });
 };
