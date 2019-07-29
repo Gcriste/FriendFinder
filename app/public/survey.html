@@ -161,6 +161,7 @@
             </div>
         </form>
 
+        <!--submit button-->
         <div class="row">
             <div class="col-5"></div>
             <div class="col-4">
@@ -168,29 +169,30 @@
             </div>
         </div>
 
+        <!--link to api friends and github link-->
         <div class="row">
             <div class="col-4"></div>
             <div class="col-3">
                 <a href="/api/friends" alt="api friends list" target="_blank"> API Friends List</a>
-                <a href="https://github.com/Gcriste/FriendFinder""> GitHub Repo</a>
+                <a href="https://github.com/Gcriste/FriendFinder"> GitHub Repo</a>
             </div>
         </div>
     </div>
 
-    
+
 
     <!-- The Modal -->
     <div id="bestFriendModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-                <h3 class="modal-title">Your New Best Friend</h1>
-            <div class="modal-body">
-                <h2 id="bestFriend"></h2>
-                <img id="bestFriendPhoto">
-            </div>
-      </div>
-    
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">Your New Best Friend</h1>
+                <div class="modal-body">
+                    <h2 id="bestFriend"></h2>
+                    <img id="bestFriendPhoto">
+                </div>
+        </div>
+
     </div>
 
 
@@ -233,7 +235,7 @@
                 var currentURL = window.location.origin;
 
 
-                // Ajax call for response after POST req
+                // Ajax call for response after post req
                 $.post(currentURL + "/api/friends", newUser, function (data) {
                     $("#bestFriend").text(data.name);
                     $("#bestFriendPhoto").attr("src", data.photo);
@@ -241,11 +243,12 @@
 
                 });
             } else {
-                // If a required field is missing, show alert
+                // If user did not answer every question error alert is shown
                 alert("Please answer every question!");
             }
         });
 
+        //modal information
         var modal = document.getElementById("bestFriendModal");
 
         // Get the button that opens the modal
