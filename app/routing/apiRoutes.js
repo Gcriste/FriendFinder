@@ -32,6 +32,7 @@ module.exports = function(app) {
       if(totalDifference < minDifference) {
        newFriend = friends[i];
         minDifference = totalDifference;
+        console.log(totalDifference)
       }
     }
 
