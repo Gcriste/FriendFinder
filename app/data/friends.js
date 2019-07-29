@@ -1,5 +1,4 @@
 var friendsArray = [
-
   {
     name:"Griffin",
     photo:"",
